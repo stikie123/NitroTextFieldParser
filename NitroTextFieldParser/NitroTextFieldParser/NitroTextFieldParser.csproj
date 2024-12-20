@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>NitroTextFieldParser</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Version>1.0.0</Version>
+    <Authors>Christiaan</Authors>
+    <Product>NitroTextFieldParser</Product>
+    <IncludeSymbols>False</IncludeSymbols>
+    <Title>NitroTextFieldParser</Title>
+    <Description>Super fast, memory efficient parser</Description>
+    <Copyright>$(Authors) @ 2024</Copyright>
+    <RepositoryUrl>https://github.com/stikie123/NitroTextFieldParser</RepositoryUrl>
+    <PackageTags>Parser;TextFieldParser;TextField</PackageTags><GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+<PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+	<ItemGroup>
+		<None Include="docs\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="docs\" />
+	</ItemGroup>
+
+</Project>

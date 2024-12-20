@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>NitroTextFieldParser</id>
+    <version>1.0.0</version>
+    <title>NitroTextFieldParser</title>
+    <authors>Christiaan</authors>
+    <description>Super fast, memory efficient parser</description>
+    <copyright>Christiaan @ 2024</copyright>
+    <tags>Parser TextFieldParser TextField</tags>
+    <repository type="git" url="https://github.com/stikie123/NitroTextFieldParser" />
+    <dependencies>
+      <group targetFramework="net9.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\side\NitroTextFieldParser\NitroTextFieldParser\bin\Release\net9.0\NitroTextFieldParser.dll" target="lib\net9.0\NitroTextFieldParser.dll" />
+  </files>
+</package>
