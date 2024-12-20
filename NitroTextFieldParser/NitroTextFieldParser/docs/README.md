@@ -70,12 +70,12 @@ Example Input:
 "Alice, Bob","30","New York"
 ```
 Output:
-- **Name
-- **Age
-- **City
-- **Alice, Bob
-- **30
-- **New York
+- Name
+- Age
+- City
+- Alice, Bob
+- 30
+- New York
 
 ---
 
@@ -116,22 +116,22 @@ Input File (data.csv):
 2,"Jane Smith","jane@example.com"
 ```
 Output:
-- **ID
-- **Name
-- **Email
-- **1
-- **John Doe
-- **john@example.com
-- **2
-- **Jane Smith
-- **jane@example.com
+- ID
+- Name
+- Email
+- 1
+- John Doe
+- john@example.com
+- 2
+- Jane Smith
+- jane@example.com
 
 ---
 
 ## Why Use NitroTextFieldParser?
-- **Efficient memory usage for handling large files.
-- **Flexible support for custom delimiters and quoted fields.
-- **Easy to integrate into any .NET project.
+- Efficient memory usage for handling large files.
+- Flexible support for custom delimiters and quoted fields.
+- Easy to integrate into any .NET project.
 
 ---
 
