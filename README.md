@@ -80,10 +80,12 @@ Example Input:
 "Alice, Bob","30","New York"
 ```
 Output:
+
 Row 1:
 - Name
 - Age
 - City
+
 Row 2:
 - Alice, Bob
 - 30
@@ -128,14 +130,17 @@ Input File (data.csv):
 2,"Jane Smith","jane@example.com"
 ```
 Output:
+
 Row 1:
 - ID
 - Name
 - Email
+
 Row 2:
 - 1
 - John Doe
 - john@example.com
+
 Row 3:
 - 2
 - Jane Smith
