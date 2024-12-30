@@ -5,6 +5,16 @@ The **NitroTextFieldParser** is a blazing-fast .NET library for parsing delimite
 
 ---
 
+## Benchmark Results
+The NitroTextFieldParser outperforms the built-in `TextFieldParser` in terms of speed and memory usage. The following benchmark results demonstrate the performance benefits of using the NitroTextFieldParser when processing 1000Rows x 9Columns CSV data:
+
+| Method       | Mean      | Error       | StdDev       | Rank       | Gen0       | Gen1       | Allocated       |
+|-----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
+| UsingNitroTextFieldParser | 2.379 ms | 0.0471 ms | 0.0595 ms | 1 | 308.5938 | 125.0000 | 1386.23 KB |
+| UsingOldTextFieldParser | 14.922 ms | 0.2980 ms | 0.5060 ms | 2 | 3312.5000 | 437.5000 | 12790.58 KB |
+
+---
+
 ## Features
 - **High Performance**: Minimal memory footprint with direct memory access.
 - **Flexible Delimiters**: Supports single or multiple custom delimiters.
@@ -70,9 +80,11 @@ Example Input:
 "Alice, Bob","30","New York"
 ```
 Output:
+Row 1:
 - Name
 - Age
 - City
+Row 2:
 - Alice, Bob
 - 30
 - New York
@@ -116,12 +128,15 @@ Input File (data.csv):
 2,"Jane Smith","jane@example.com"
 ```
 Output:
+Row 1:
 - ID
 - Name
 - Email
+Row 2:
 - 1
 - John Doe
 - john@example.com
+Row 3:
 - 2
 - Jane Smith
 - jane@example.com
