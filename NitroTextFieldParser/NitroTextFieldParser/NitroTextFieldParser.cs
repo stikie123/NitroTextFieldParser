@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
 
-namespace IIAB.Processor.Generic
+namespace NitroTextFieldParser
 {
   /// <summary>
   /// A reimplementation of a TextFieldParser for parsing delimited or fixed-width fields.
