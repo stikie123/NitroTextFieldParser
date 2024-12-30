@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj": {}
+    "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj": {}
   },
   "projects": {
-    "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj": {
-      "version": "1.0.0",
+    "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj": {
+      "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj",
+        "projectUniqueName": "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj",
         "projectName": "NitroTextFieldParser",
-        "projectPath": "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj",
+        "projectPath": "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser.csproj",
         "packagesPath": "C:\\Users\\StiaanBekker\\.nuget\\packages\\",
-        "outputPath": "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\obj\\",
+        "outputPath": "D:\\side\\NitroTextFieldParser\\NitroTextFieldParser\\NitroTextFieldParser\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
