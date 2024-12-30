@@ -9,3 +9,15 @@ D:\side\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFi
 D:\side\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\refint\NitroTextFieldParser.dll
 D:\side\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.pdb
 D:\side\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\ref\NitroTextFieldParser.dll
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\bin\Release\net9.0\NitroTextFieldParser.deps.json
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\bin\Release\net9.0\NitroTextFieldParser.dll
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\bin\Release\net9.0\NitroTextFieldParser.pdb
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.GeneratedMSBuildEditorConfig.editorconfig
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.AssemblyInfoInputs.cache
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.AssemblyInfo.cs
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.csproj.CoreCompileInputs.cache
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.sourcelink.json
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.dll
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\refint\NitroTextFieldParser.dll
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\NitroTextFieldParser.pdb
+D:\side\NitroTextFieldParser\NitroTextFieldParser\NitroTextFieldParser\obj\Release\net9.0\ref\NitroTextFieldParser.dll
