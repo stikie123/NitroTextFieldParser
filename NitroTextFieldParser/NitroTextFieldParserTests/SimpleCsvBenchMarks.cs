@@ -110,7 +110,7 @@ public class SimpleCsvBenchMarks
     try
     {
       // using var reader = new StreamReader(inputStream);
-      using var parser = new NitroTextFieldParser.NitroTextFieldParser(inputStream);
+      using var parser = new TextFieldParser(inputStream);
 
       parser.SetDelimiters(delimiters); // Accepts multiple delimiters
       parser.HasFieldsEnclosedInQuotes = hasTextQualifier;
