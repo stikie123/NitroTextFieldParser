@@ -35,8 +35,10 @@ Include the `NitroTextFieldParser` class in your .NET project or package it into
 Create an instance of the parser with your data stream.
 
 ```csharp
+using NitroTextFieldParser;
+
 using (var stream = File.OpenRead("data.csv"))
-using (var parser = new NitroTextFieldParser(stream))
+using (var parser = new TextFieldParser(stream))
 {
     parser.SetDelimiters(","); // Set the delimiter for parsing
     parser.HasFieldsEnclosedInQuotes = true; // Enable quote handling
@@ -96,7 +98,7 @@ Row 2:
 ## Custom Encoding
 Specify a custom character encoding:
 ```csharp
-using (var parser = new NitroTextFieldParser(stream, Encoding.UTF8))
+using (var parser = new TextFieldParser(stream, Encoding.UTF8))
 {
     // Custom encoding setup
 }
@@ -108,7 +110,7 @@ using (var parser = new NitroTextFieldParser(stream, Encoding.UTF8))
 Keep the stream open after parsing:
 
 ```csharp
-var parser = new NitroTextFieldParser(stream, Encoding.UTF8, true, true);
+var parser = new TextFieldParser(stream, Encoding.UTF8, true, true);
 ```
 
 ---
