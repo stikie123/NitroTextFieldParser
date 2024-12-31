@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>NitroTextFieldParser</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
-    <Version>1.0.1</Version>
+    <PackageVersion>1.0.2</PackageVersion>
+    <Version>1.0.2</Version>
     <Authors>Christiaan/Stikie123</Authors>
     <Product>NitroTextFieldParser</Product>
     <IncludeSymbols>False</IncludeSymbols>
