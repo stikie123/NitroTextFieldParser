@@ -6,7 +6,7 @@ namespace NitroTextFieldParser
   /// <summary>
   /// A reimplementation of a TextFieldParser for parsing delimited or fixed-width fields.
   /// </summary>
-  public class NitroTextFieldParser : IDisposable
+  public class TextFieldParser : IDisposable
   {
     private StreamReader _reader;
     private readonly bool _leaveOpen;
@@ -18,13 +18,13 @@ namespace NitroTextFieldParser
 
     public bool EndOfData => _reader?.EndOfStream ?? true;
 
-    public NitroTextFieldParser(Stream stream) : this(stream, Encoding.UTF8, true, false) { }
+    public TextFieldParser(Stream stream) : this(stream, Encoding.UTF8, true, false) { }
 
-    public NitroTextFieldParser(Stream stream, Encoding defaultEncoding) : this(stream, defaultEncoding, true, false) { }
+    public TextFieldParser(Stream stream, Encoding defaultEncoding) : this(stream, defaultEncoding, true, false) { }
 
-    public NitroTextFieldParser(Stream stream, Encoding defaultEncoding, bool detectEncoding) : this(stream, defaultEncoding, detectEncoding, false) { }
+    public TextFieldParser(Stream stream, Encoding defaultEncoding, bool detectEncoding) : this(stream, defaultEncoding, detectEncoding, false) { }
 
-    public NitroTextFieldParser(Stream stream, Encoding defaultEncoding, bool detectEncoding, bool leaveOpen)
+    public TextFieldParser(Stream stream, Encoding defaultEncoding, bool detectEncoding, bool leaveOpen)
     {
       _leaveOpen = leaveOpen;
       InitializeFromStream(stream, defaultEncoding, detectEncoding);
