@@ -6,3 +6,13 @@ src/packages
 *.cache
 *.logs
 .vs
+/NitroTextFieldParser/NitroTextFieldParser/bin
+/NitroTextFieldParser/NitroTextFieldParser/obj
+/NitroTextFieldParser/NitroTextFieldParser/bin/Release/net9.0/NitroTextFieldParser.dll
+/NitroTextFieldParser/NitroTextFieldParser/bin/Release/net9.0/NitroTextFieldParser.pdb
+/NitroTextFieldParser/NitroTextFieldParser/obj/Release/net9.0/ref/NitroTextFieldParser.dll
+/NitroTextFieldParser/NitroTextFieldParser/obj/Release/net9.0/refint/NitroTextFieldParser.dll
+/NitroTextFieldParser/NitroTextFieldParser/obj/Release/net9.0/NitroTextFieldParser.AssemblyInfo.cs
+/NitroTextFieldParser/NitroTextFieldParser/obj/Release/net9.0/NitroTextFieldParser.AssemblyInfoInputs.cache
+/NitroTextFieldParser/NitroTextFieldParser/obj/Release/net9.0/NitroTextFieldParser.dll
+/NitroTextFieldParser/NitroTextFieldParser/obj/Release/net9.0/NitroTextFieldParser.pdb
