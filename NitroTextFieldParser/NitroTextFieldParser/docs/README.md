@@ -12,6 +12,7 @@ The NitroTextFieldParser outperforms the built-in `TextFieldParser` in terms of 
 |----------------------------------------------------- |----------:|----------:|----------:|-----:|----------:|---------:|--------:|----------:|
 | ProcessCsvAsMemoryLineNewTextFieldParser             |  1.708 ms | 0.0327 ms | 0.0425 ms |    1 |  310.5469 | 130.8594 |       - |   1.35 MB |
 | ProcessSimpleCsvOldTextFieldParser                   | 10.165 ms | 0.1966 ms | 0.2624 ms |    2 | 3343.7500 | 515.6250 | 31.2500 |  12.46 MB |
+
 ---
 
 ## Release Notes
