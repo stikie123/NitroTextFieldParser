@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace NitroTextFieldParser
@@ -85,7 +86,10 @@ namespace NitroTextFieldParser
 
     private ReadOnlyMemory<char>[] ParseQuotedFields(string line)
     {
-      var fields = new List<ReadOnlyMemory<char>>();
+      if (string.IsNullOrEmpty(line))
+        return Array.Empty<ReadOnlyMemory<char>>();
+
+      List<ReadOnlyMemory<char>> fields = new List<ReadOnlyMemory<char>>();
       int start = 0, fieldStart = 0;
       bool inQuotes = false;
 
@@ -93,25 +97,41 @@ namespace NitroTextFieldParser
       {
         if (line[i] == '"')
         {
-          if (inQuotes && i + 1 < line.Length && line[i + 1] == '"')
+          if (inQuotes)
           {
-            i++; // Skip escaped quote
+            if (i + 1 < line.Length && line[i + 1] == '"')
+            {
+              i++; // Skip escaped quote
+            }
+            else
+            {
+              inQuotes = false;
+              fieldStart = i + 1;
+            }
           }
           else
           {
-            inQuotes = !inQuotes;
-            if (!inQuotes) fieldStart = i + 1;
+            inQuotes = true;
+            fieldStart = i + 1;
           }
         }
         else if (!inQuotes && IsDelimiterAt(line, i, out int delimiterLength))
         {
-          fields.Add(line.AsMemory(start, fieldStart - start));
+          if (fieldStart < start)
+            fieldStart = start;
+
+          fields.Add(line.AsMemory(start, i - start).Trim('"'));
           start = i + delimiterLength;
           i += delimiterLength - 1; // Move past the delimiter
         }
       }
 
-      fields.Add(line.AsMemory(start));
+      if (start <= line.Length)
+        fields.Add(line.AsMemory(start, line.Length - start).Trim('"'));
+
+      if (inQuotes)
+        throw new FormatException($"Unbalanced quotes in line: {line}");
+
       return fields.ToArray();
     }
 
