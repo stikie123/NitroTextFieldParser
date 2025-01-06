@@ -34,7 +34,20 @@ public class SimpleCsvBenchMarks
   }
 
   [Benchmark]
-  public void ProcessSimpleCsvAsMemoryLineNewTextFieldParser()
+  public void ProcessCsvAsMemoryLineNewTextFieldParser()
+  {
+    using var csvStream = new MemoryStream(_csvData);
+    var processedRows = new List<SimpleCsvRowPopulatedTest>();
+    csvStream.Position = 0;
+    var processLine = (ReadOnlyMemory<char>[] fields) => { processedRows.Add(new SimpleCsvRowPopulatedTest(fields)); };
+    var rowsProcessed =
+      ProcessSimpleCsvActionMemoryNewTextFieldParser(csvStream, processLine, CancellationToken.None, false, false, true,
+        ",");
+
+    Console.WriteLine($"Processed {rowsProcessed} rows");
+  }
+  [Benchmark]
+  public void ProcessCsvAsMemoryLineNewTextFieldParserQuotedFields()
   {
     using var csvStream = new MemoryStream(_csvData);
     var processedRows = new List<SimpleCsvRowPopulatedTest>();

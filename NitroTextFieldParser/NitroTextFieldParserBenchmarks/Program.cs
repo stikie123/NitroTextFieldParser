@@ -8,7 +8,7 @@ public class Program
    {
 #if DEBUG
      var instance = new SimpleCsvBenchMarks();
-     instance.ProcessSimpleCsvAsMemoryLineNewTextFieldParser();
+     instance.ProcessCsvAsMemoryLineNewTextFieldParser();
 #else
     BenchmarkRunner.Run<SimpleCsvBenchMarks>();
 #endif

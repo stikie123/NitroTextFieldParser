@@ -8,10 +8,16 @@ The **NitroTextFieldParser** is a blazing-fast .NET library for parsing delimite
 ## Benchmark Results
 The NitroTextFieldParser outperforms the built-in `TextFieldParser` in terms of speed and memory usage. The following benchmark results demonstrate the performance benefits of using the NitroTextFieldParser when processing 1000Rows x 9Columns CSV data:
 
-| Method       | Mean      | Error       | StdDev       | Rank       | Gen0       | Gen1       | Allocated       |
-|-----------------|----------------|----------------|----------------|----------------|----------------|----------------|----------------|
-| UsingNitroTextFieldParser | 2.379 ms | 0.0471 ms | 0.0595 ms | 1 | 308.5938 | 125.0000 | 1386.23 KB |
-| UsingOldTextFieldParser | 14.922 ms | 0.2980 ms | 0.5060 ms | 2 | 3312.5000 | 437.5000 | 12790.58 KB |
+| Method                                               | Mean      | Error     | StdDev    | Rank | Gen0      | Gen1     | Gen2    | Allocated |
+|----------------------------------------------------- |----------:|----------:|----------:|-----:|----------:|---------:|--------:|----------:|
+| ProcessCsvAsMemoryLineNewTextFieldParser             |  1.708 ms | 0.0327 ms | 0.0425 ms |    1 |  310.5469 | 130.8594 |       - |   1.35 MB |
+| ProcessSimpleCsvOldTextFieldParser                   | 10.165 ms | 0.1966 ms | 0.2624 ms |    2 | 3343.7500 | 515.6250 | 31.2500 |  12.46 MB |
+
+---
+
+## Release Notes
+- Improced Testing for maintainability.
+- Improved Quoted Text Field Parsing: Including support for escaped quotes
 
 ---
 
