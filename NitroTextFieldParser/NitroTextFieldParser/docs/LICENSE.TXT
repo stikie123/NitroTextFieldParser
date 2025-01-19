@@ -1,0 +1,47 @@
+This software is dual-licensed:
+
+1. Custom Open Source License
+   You may use this software under the terms of this Custom Open Source License.
+
+2. Commercial License
+   For commercial use, a separate license is required. Please contact stianbekker@gmail.com for details.
+
+Custom Open Source License:
+-----------------
+Copyright (c) [2025] [Christiaan Bekker/Stikie123]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, merge, and distribute the Software, subject to the following
+conditions:
+
+1. The Software may be used freely in:
+   - Open-source projects that are free and publicly available.
+   - Personal projects or non-commercial educational purposes.
+
+2. For any commercial use, including but not limited to using the Software in
+   paid products, services, or proprietary projects, the user must obtain a
+   separate commercial license from [Christiaan Bekker/Stikie123]. Please
+   contact [stianbekker@gmail.com] to arrange licensing terms.
+
+3. Credit must be given to [Christiaan Bekker/Stikie123] in all copies or
+   substantial portions of the Software. This includes clear attribution in
+   the documentation, source code, or any materials distributed with the
+   Software.
+
+4. Any modifications made to the Software must:
+   - Be clearly documented.
+   - Be made available to the public under the same terms as this license
+     unless explicit written permission is granted by [Christiaan Bekker/Stikie123].
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Commercial License Text:
+------------------------
+For commercial use, please acquire a license by contacting [stianbekker@gmail.com].

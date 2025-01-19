@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>NitroTextFieldParser</PackageId>
-    <PackageVersion>1.0.3</PackageVersion>
-    <Version>1.0.3</Version>
+    <PackageVersion>1.1.0</PackageVersion>
+    <Version>1.1.0</Version>
     <Authors>Christiaan/Stikie123</Authors>
     <Product>NitroTextFieldParser</Product>
     <IncludeSymbols>False</IncludeSymbols>
@@ -16,9 +16,13 @@
     <RepositoryUrl>https://github.com/stikie123/NitroTextFieldParser</RepositoryUrl>
     <PackageTags>Parser;TextFieldParser;TextField</PackageTags><GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 	<ItemGroup>
 		<None Include="docs\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="docs\LICENSE.txt" Pack="true" PackagePath=""/>
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="docs\" />

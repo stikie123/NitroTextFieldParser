@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NitroTextFieldParser.Helpers;
 using NUnit.Framework;
 
 namespace NitroTextFieldParserTests
@@ -13,6 +14,63 @@ namespace NitroTextFieldParserTests
     private NitroTextFieldParser.TextFieldParser _parser;
 
     #region BasicFields Tests
+
+    [Test]
+    public async Task ParseQuotedFields_ShouldHandleValidatedFields()
+    {
+      // Setup
+      var sampleData = new MemoryStream(Encoding.UTF8.GetBytes("Field1,2,\"2025-01-09,18:45:00\""));
+      _parser = new NitroTextFieldParser.TextFieldParser(sampleData);
+
+      // Arrange
+      _parser.SetDelimiters(",");
+      _parser.HasFieldsEnclosedInQuotes = true;
+
+      _parser.SetValidatorSchema(
+        field => !string.IsNullOrWhiteSpace(field),         // Non-empty string
+        field => int.TryParse(field, out _),               // Integer validation
+        field => DateTime.TryParse(field, out _)           // Date validation
+      );
+
+      // Act
+      var result = _parser.ReadFieldsWithValidation();
+
+      // Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(3, result.Length);
+      for (int i = 0; i < result.Length; i++)
+      {
+        TestContext.WriteLine($"Field {i + 1}: {result[i]}");
+      }
+    }
+    [Test]
+    public async Task ParseQuotedFields_ShouldHandleFieldSchema()
+    {
+      // Setup
+      var sampleData = new MemoryStream(Encoding.UTF8.GetBytes("XA123,2,\"2025-01-09\""));
+      _parser = new NitroTextFieldParser.TextFieldParser(sampleData);
+
+      // Arrange
+      _parser.SetDelimiters(",");
+      _parser.HasFieldsEnclosedInQuotes = true;
+
+      _parser.SetFieldSchemas(
+        new FieldSchema(5, "^XA\\d{3}$"),               // Field 1: Exactly 5 characters, starts with XA, ends with 3 digits
+        new FieldSchema(customValidator: field => int.TryParse(field, out _)), // Field 2: Integer validation
+        new FieldSchema(pattern: @"^\d{4}-\d{2}-\d{2}$") // Field 3: Date in YYYY-MM-DD format
+      );
+
+      // Act
+      var result = _parser.ReadFieldsWithSchemaValidation();
+
+      // Assert
+      Assert.IsNotNull(result);
+      Assert.AreEqual(3, result.Length);
+      for (int i = 0; i < result.Length; i++)
+      {
+        TestContext.WriteLine($"Field {i + 1}: {result[i]}");
+      }
+    }
 
     [Test]
     public async Task ParseBasicFields_ShouldHandleBasicDelimitedFields()
