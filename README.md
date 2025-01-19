@@ -10,14 +10,13 @@ The NitroTextFieldParser outperforms the built-in `TextFieldParser` in terms of 
 
 | Method                                               | Mean      | Error     | StdDev    | Rank | Gen0      | Gen1     | Gen2    | Allocated |
 |----------------------------------------------------- |----------:|----------:|----------:|-----:|----------:|---------:|--------:|----------:|
-| ProcessCsvAsMemoryLineNewTextFieldParser             |  1.708 ms | 0.0327 ms | 0.0425 ms |    1 |  310.5469 | 130.8594 |       - |   1.35 MB |
-| ProcessSimpleCsvOldTextFieldParser                   | 10.165 ms | 0.1966 ms | 0.2624 ms |    2 | 3343.7500 | 515.6250 | 31.2500 |  12.46 MB |
+| NitroTextFieldParser                                 |  1.663 ms | 0.0187 ms | 0.0175 ms |    1 |  306.6406 | 134.7656 |       - |   1.35 MB |
+| OldTextFieldParser                                   |  9.543 ms | 0.1640 ms | 0.1534 ms |    2 | 3343.7500 | 421.8750 | 15.6250 |  12.51 MB |
 
 ---
 
-## Release Notes
-- Improced Testing for maintainability.
-- Improved Quoted Text Field Parsing: Including support for escaped quotes
+## Release Notes 1.1.0v
+- New Feature: Added schema validation support for parsing fields with precise data structures. Users can now define custom patterns and types for fields, enabling automated detection of malformed data.
 
 ---
 
@@ -27,6 +26,7 @@ The NitroTextFieldParser outperforms the built-in `TextFieldParser` in terms of 
 - **Quoted Field Handling**: Handles fields enclosed in quotes with support for escaped quotes.
 - **Stream-Based**: Reads data directly from any `Stream`, suitable for large files.
 - **Encoding Support**: Works with any character encoding.
+- **Schema Validation**: Define custom patterns and types for fields to validate data structures.*
 
 ---
 
@@ -165,3 +165,50 @@ Row 3:
 
 ## License
 
+This software is dual-licensed:
+
+1. Custom Open Source License
+   You may use this software under the terms of this Custom Open Source License.
+
+2. Commercial License
+   For commercial use, a separate license is required. Please contact stianbekker@gmail.com for details.
+
+Custom Open Source License:
+-----------------
+Copyright (c) [2025] [Christiaan Bekker/Stikie123]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to use,
+copy, modify, merge, and distribute the Software, subject to the following
+conditions:
+
+1. The Software may be used freely in:
+   - Open-source projects that are free and publicly available.
+   - Personal projects or non-commercial educational purposes.
+
+2. For any commercial use, including but not limited to using the Software in
+   paid products, services, or proprietary projects, the user must obtain a
+   separate commercial license from [Christiaan Bekker/Stikie123]. Please
+   contact [stianbekker@gmail.com] to arrange licensing terms.
+
+3. Credit must be given to [Christiaan Bekker/Stikie123] in all copies or
+   substantial portions of the Software. This includes clear attribution in
+   the documentation, source code, or any materials distributed with the
+   Software.
+
+4. Any modifications made to the Software must:
+   - Be clearly documented.
+   - Be made available to the public under the same terms as this license
+     unless explicit written permission is granted by [Christiaan Bekker/Stikie123].
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Commercial License Text:
+------------------------
+For commercial use, please acquire a license by contacting [stianbekker@gmail.com].

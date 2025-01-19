@@ -20,7 +20,7 @@ public class SimpleCsvBenchMarks
   }
 
   [Benchmark]
-  public void ProcessSimpleCsvOldTextFieldParser()
+  public void OldTextFieldParser()
   {
     using var csvStream = new MemoryStream(_csvData);
     var processedRows = new List<SimpleCsvRowPopulated>();
@@ -34,7 +34,7 @@ public class SimpleCsvBenchMarks
   }
 
   [Benchmark]
-  public void ProcessCsvAsMemoryLineNewTextFieldParser()
+  public void NitroTextFieldParser()
   {
     using var csvStream = new MemoryStream(_csvData);
     var processedRows = new List<SimpleCsvRowPopulatedTest>();
@@ -46,19 +46,7 @@ public class SimpleCsvBenchMarks
 
     Console.WriteLine($"Processed {rowsProcessed} rows");
   }
-  [Benchmark]
-  public void ProcessCsvAsMemoryLineNewTextFieldParserQuotedFields()
-  {
-    using var csvStream = new MemoryStream(_csvData);
-    var processedRows = new List<SimpleCsvRowPopulatedTest>();
-    csvStream.Position = 0;
-    var processLine = (ReadOnlyMemory<char>[] fields) => { processedRows.Add(new SimpleCsvRowPopulatedTest(fields)); };
-    var rowsProcessed =
-      ProcessSimpleCsvActionMemoryNewTextFieldParser(csvStream, processLine, CancellationToken.None, false, false, true,
-        ",");
-
-    Console.WriteLine($"Processed {rowsProcessed} rows");
-  }
+  
 
   public static int ProcessSimpleCsvActionMemoryOldTextFieldParser(
     Stream inputStream,
