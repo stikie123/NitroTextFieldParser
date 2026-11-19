@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFrameworks>net8.0;net10.0;net11.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>NitroTextFieldParser</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
-    <Version>1.1.0</Version>
+    <PackageVersion>1.2.0</PackageVersion>
+    <Version>1.2.0</Version>
     <Authors>Christiaan/Stikie123</Authors>
     <Product>NitroTextFieldParser</Product>
     <IncludeSymbols>False</IncludeSymbols>
