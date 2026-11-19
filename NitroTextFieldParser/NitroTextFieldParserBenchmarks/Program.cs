@@ -8,9 +8,9 @@ public class Program
    {
 #if DEBUG
      var instance = new SimpleCsvBenchMarks();
-     instance.ProcessCsvAsMemoryLineNewTextFieldParser();
+     instance.NitroTextFieldParser();
 #else
-    BenchmarkRunner.Run<SimpleCsvBenchMarks>();
+    BenchmarkRunner.Run<SimpleCsvBenchMarks>(args: args);
 #endif
 
   }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,8 +36,8 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFieldsWithValidation();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(3, result.Length);
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(3));
       for (int i = 0; i < result.Length; i++)
       {
         TestContext.WriteLine($"Field {i + 1}: {result[i]}");
@@ -64,8 +64,8 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFieldsWithSchemaValidation();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(3, result.Length);
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(3));
       for (int i = 0; i < result.Length; i++)
       {
         TestContext.WriteLine($"Field {i + 1}: {result[i]}");
@@ -87,8 +87,8 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFields();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(3, result.Length);
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(3));
       for (int i = 0; i < result.Length; i++)
       {
         TestContext.WriteLine($"Field {i + 1}: {result[i]}");
@@ -110,8 +110,8 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFields();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(3, result.Length);
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(3));
       for (int i = 0; i < result.Length; i++)
       {
         TestContext.WriteLine($"Field {i + 1}: {result[i]}");
@@ -129,7 +129,7 @@ namespace NitroTextFieldParserTests
       var result = emptyLineParser.ReadFields();
 
       // Assert
-      Assert.IsNull(result);
+      Assert.That(result, Is.Null);
     }
 
     [Test]
@@ -143,7 +143,7 @@ namespace NitroTextFieldParserTests
       _parser.HasFieldsEnclosedInQuotes = false;
 
       // Act & Assert
-      Assert.Throws<InvalidOperationException>(() => _parser.ReadFields());
+      Assert.Throws<InvalidOperationException>(new TestDelegate(() => _parser.ReadFields()));
     }
 
     #endregion
@@ -164,8 +164,8 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFields();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(3, result.Length);
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(3));
       for (int i = 0; i < result.Length; i++)
       {
         TestContext.WriteLine($"Field {i + 1}: {result[i]}");
@@ -187,8 +187,8 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFields();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(3, result.Length);
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(3));
       for (int i = 0; i < result.Length; i++)
       {
         TestContext.WriteLine($"Field {i + 1}: {result[i]}");
@@ -210,9 +210,9 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFields();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(3, result.Length);
-      Assert.AreEqual("Field7, with \"escaped\" quotes", result[0].ToString());
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(3));
+      Assert.That(result[0].ToString(), Is.EqualTo("Field7, with \"escaped\" quotes"));
       for (int i = 0; i < result.Length; i++)
       {
         TestContext.WriteLine($"Field {i + 1}: {result[i]}");
@@ -233,12 +233,12 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFields();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(4, result.Length); // Expect 4 fields including an empty field for the trailing delimiter
-      Assert.AreEqual("Field2", result[0].ToString());
-      Assert.AreEqual("Field4", result[1].ToString());
-      Assert.AreEqual("Field5", result[2].ToString());
-      Assert.AreEqual(string.Empty, result[3].ToString()); // Empty field for the trailing delimiter
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(4)); // Expect 4 fields including an empty field for the trailing delimiter
+      Assert.That(result[0].ToString(), Is.EqualTo("Field2"));
+      Assert.That(result[1].ToString(), Is.EqualTo("Field4"));
+      Assert.That(result[2].ToString(), Is.EqualTo("Field5"));
+      Assert.That(result[3].ToString(), Is.EqualTo(string.Empty)); // Empty field for the trailing delimiter
 
       foreach (var field in result)
       {
@@ -261,12 +261,12 @@ namespace NitroTextFieldParserTests
       var result = _parser.ReadFields();
 
       // Assert
-      Assert.IsNotNull(result);
-      Assert.AreEqual(4, result.Length); // Expect 4 fields including an empty field for the trailing delimiter
-      Assert.AreEqual("Field1", result[0].ToString());
-      Assert.AreEqual("Field2", result[1].ToString());
-      Assert.AreEqual("Field3", result[2].ToString());
-      Assert.AreEqual(string.Empty, result[3].ToString()); // Explicitly check for an empty field
+      Assert.That(result, Is.Not.Null);
+      Assert.That(result.Length, Is.EqualTo(4)); // Expect 4 fields including an empty field for the trailing delimiter
+      Assert.That(result[0].ToString(), Is.EqualTo("Field1"));
+      Assert.That(result[1].ToString(), Is.EqualTo("Field2"));
+      Assert.That(result[2].ToString(), Is.EqualTo("Field3"));
+      Assert.That(result[3].ToString(), Is.EqualTo(string.Empty)); // Explicitly check for an empty field
 
       // Output results
       foreach (var field in result)
@@ -287,7 +287,7 @@ namespace NitroTextFieldParserTests
       var result = emptyLineParser.ReadFields();
 
       // Assert
-      Assert.IsNull(result);
+      Assert.That(result, Is.Null);
     }
 
     [Test]
@@ -301,7 +301,7 @@ namespace NitroTextFieldParserTests
       _parser.HasFieldsEnclosedInQuotes = true;
 
       // Act & Assert
-      Assert.Throws<InvalidOperationException>(() => _parser.ReadFields());
+      Assert.Throws<InvalidOperationException>(new TestDelegate(() => _parser.ReadFields()));
     }
 
     #endregion
