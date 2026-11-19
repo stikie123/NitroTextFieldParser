@@ -1,0 +1,51 @@
+name: Publish to NuGet
+
+# Runs when a version tag is pushed, e.g.:
+#   git tag v1.2.0
+#   git push origin v1.2.0
+# The package version is taken from the tag (v1.2.0 -> 1.2.0).
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish:
+    # Windows runner: the csproj references docs\LICENSE.txt but the file is
+    # LICENSE.TXT, which only resolves on a case-insensitive file system.
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+            11.0.x
+
+      - name: Get version from tag
+        id: version
+        shell: bash
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Test
+        run: dotnet test NitroTextFieldParser/NitroTextFieldParser.sln -c Release
+
+      - name: Pack
+        run: >
+          dotnet pack NitroTextFieldParser/NitroTextFieldParser/NitroTextFieldParser.csproj
+          -c Release -o ./artifacts
+          -p:Version=${{ steps.version.outputs.version }}
+          -p:PackageVersion=${{ steps.version.outputs.version }}
+
+      - name: Push to NuGet
+        shell: bash
+        run: >
+          dotnet nuget push "./artifacts/*.nupkg"
+          --api-key "${{ secrets.NUGET_API_KEY }}"
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate
