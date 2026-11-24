@@ -46,7 +46,28 @@ public class SimpleCsvBenchMarks
 
     Console.WriteLine($"Processed {rowsProcessed} rows");
   }
-  
+
+  // Parser-only benchmarks: no row model, so they measure ReadFields itself.
+  [Benchmark]
+  public int NitroParseOnly() => ParseOnly(quoted: false);
+
+  [Benchmark]
+  public int NitroParseOnlyQuotedMode() => ParseOnly(quoted: true);
+
+  private int ParseOnly(bool quoted)
+  {
+    using var csvStream = new MemoryStream(_csvData);
+    using var parser = new TextFieldParser(csvStream);
+    parser.SetDelimiters(",");
+    parser.HasFieldsEnclosedInQuotes = quoted;
+
+    var totalFields = 0;
+    while (!parser.EndOfData)
+    {
+      totalFields += parser.ReadFields().Length;
+    }
+    return totalFields;
+  }
 
   public static int ProcessSimpleCsvActionMemoryOldTextFieldParser(
     Stream inputStream,

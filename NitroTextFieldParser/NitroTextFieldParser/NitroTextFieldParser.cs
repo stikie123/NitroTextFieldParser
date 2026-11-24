@@ -1,7 +1,7 @@
 ﻿using NitroTextFieldParser.Helpers;
 using System;
+using System.Buffers;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace NitroTextFieldParser
 {
@@ -13,10 +13,18 @@ namespace NitroTextFieldParser
     private StreamReader _reader;
     private readonly bool _leaveOpen;
     private bool _isDisposed;
-    private string[] _delimiters;
+    private string[]? _delimiters;
     private List<Func<string, bool>> _fieldValidators;
     private List<FieldSchema> _fieldSchemas;
-    private Regex _delimiterRegex;
+
+    // First character of every delimiter, for vectorised scanning.
+    private SearchValues<char>? _delimiterStarts;
+    // Same set plus '"', used when HasFieldsEnclosedInQuotes is true.
+    private SearchValues<char>? _delimiterStartsOrQuote;
+    private bool _allDelimitersSingleChar;
+
+    // Reused between rows so only the returned array is allocated per row.
+    private readonly List<ReadOnlyMemory<char>> _fieldBuffer = new();
 
     public bool HasFieldsEnclosedInQuotes { get; set; } = false;
 
@@ -87,8 +95,26 @@ namespace NitroTextFieldParser
       }
 
       _delimiters = delimiters;
-      string pattern = string.Join("|", Array.ConvertAll(delimiters, Regex.Escape));
-      _delimiterRegex = new Regex(pattern, RegexOptions.Compiled);
+
+      var startChars = new HashSet<char>();
+      bool allSingleChar = true;
+      foreach (var delimiter in delimiters)
+      {
+        startChars.Add(delimiter[0]);
+        if (delimiter.Length != 1)
+          allSingleChar = false;
+      }
+
+      var startArray = new char[startChars.Count];
+      startChars.CopyTo(startArray);
+      _delimiterStarts = SearchValues.Create(startArray);
+
+      startChars.Add('"');
+      var startOrQuoteArray = new char[startChars.Count];
+      startChars.CopyTo(startOrQuoteArray);
+      _delimiterStartsOrQuote = SearchValues.Create(startOrQuoteArray);
+
+      _allDelimitersSingleChar = allSingleChar;
     }
     public void SetValidatorSchema(params Func<string, bool>[] fieldValidators)
     {
@@ -137,16 +163,29 @@ namespace NitroTextFieldParser
 
     private ReadOnlyMemory<char>[] SplitLineToFields(string line)
     {
-      var fields = new List<ReadOnlyMemory<char>>();
-      int start = 0;
+      var fields = _fieldBuffer;
+      fields.Clear();
 
-      for (int i = 0; i < line.Length; i++)
+      ReadOnlySpan<char> span = line;
+      int start = 0;
+      int pos = 0;
+
+      while (true)
       {
-        if (IsDelimiterAt(line, i, out int delimiterLength))
+        // Jump straight to the next character that could begin a delimiter.
+        int offset = span.Slice(pos).IndexOfAny(_delimiterStarts!);
+        if (offset < 0)
+          break;
+
+        int i = pos + offset;
+        if (IsDelimiterAt(span, i, out int delimiterLength))
         {
           fields.Add(line.AsMemory(start, i - start));
-          start = i + delimiterLength;
-          i += delimiterLength - 1; // Move past the delimiter
+          start = pos = i + delimiterLength;
+        }
+        else
+        {
+          pos = i + 1;
         }
       }
 
@@ -159,45 +198,47 @@ namespace NitroTextFieldParser
       if (string.IsNullOrEmpty(line))
         return Array.Empty<ReadOnlyMemory<char>>();
 
-      List<ReadOnlyMemory<char>> fields = new List<ReadOnlyMemory<char>>();
-      int start = 0, fieldStart = 0;
+      var fields = _fieldBuffer;
+      fields.Clear();
+
+      ReadOnlySpan<char> span = line;
+      int start = 0;
+      int pos = 0;
       bool inQuotes = false;
 
-      for (int i = 0; i < line.Length; i++)
+      while (true)
       {
-        if (line[i] == '"')
-        {
-          if (inQuotes)
-          {
-            if (i + 1 < line.Length && line[i + 1] == '"')
-            {
-              i++; // Skip escaped quote
-            }
-            else
-            {
-              inQuotes = false;
-              fieldStart = i + 1;
-            }
-          }
-          else
-          {
-            inQuotes = true;
-            fieldStart = i + 1;
-          }
-        }
-        else if (!inQuotes && IsDelimiterAt(line, i, out int delimiterLength))
-        {
-          if (fieldStart < start)
-            fieldStart = start;
+        // Inside quotes only a quote can change state; outside, a quote or a delimiter can.
+        int offset = inQuotes
+          ? span.Slice(pos).IndexOf('"')
+          : span.Slice(pos).IndexOfAny(_delimiterStartsOrQuote!);
+        if (offset < 0)
+          break;
 
+        int i = pos + offset;
+        if (span[i] == '"')
+        {
+          if (inQuotes && i + 1 < span.Length && span[i + 1] == '"')
+          {
+            pos = i + 2; // Skip escaped quote
+            continue;
+          }
+
+          inQuotes = !inQuotes;
+          pos = i + 1;
+        }
+        else if (IsDelimiterAt(span, i, out int delimiterLength))
+        {
           fields.Add(line.AsMemory(start, i - start).Trim('"'));
-          start = i + delimiterLength;
-          i += delimiterLength - 1; // Move past the delimiter
+          start = pos = i + delimiterLength;
+        }
+        else
+        {
+          pos = i + 1;
         }
       }
 
-      if (start <= line.Length)
-        fields.Add(line.AsMemory(start, line.Length - start).Trim('"'));
+      fields.Add(line.AsMemory(start).Trim('"'));
 
       if (inQuotes)
         throw new FormatException($"Unbalanced quotes in line: {line}");
@@ -205,11 +246,19 @@ namespace NitroTextFieldParser
       return fields.ToArray();
     }
 
-    private bool IsDelimiterAt(string line, int index, out int delimiterLength)
+    // Called only at positions holding the first character of some delimiter.
+    private bool IsDelimiterAt(ReadOnlySpan<char> line, int index, out int delimiterLength)
     {
-      foreach (string delimiter in _delimiters)
+      if (_allDelimitersSingleChar)
       {
-        if (line.AsSpan(index).StartsWith(delimiter))
+        delimiterLength = 1;
+        return true;
+      }
+
+      var remaining = line.Slice(index);
+      foreach (string delimiter in _delimiters!)
+      {
+        if (remaining.StartsWith(delimiter))
         {
           delimiterLength = delimiter.Length;
           return true;

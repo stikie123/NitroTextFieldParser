@@ -8,12 +8,24 @@ The **NitroTextFieldParser** is a blazing-fast .NET library for parsing delimite
 ## Benchmark Results
 The NitroTextFieldParser outperforms the built-in `TextFieldParser` in terms of speed and memory usage. The following benchmark results demonstrate the performance benefits of using the NitroTextFieldParser when processing 1000Rows x 9Columns CSV data:
 
-| Method                                               | Mean      | Error     | StdDev    | Rank | Gen0      | Gen1     | Gen2    | Allocated |
-|----------------------------------------------------- |----------:|----------:|----------:|-----:|----------:|---------:|--------:|----------:|
-| NitroTextFieldParser                                 |  1.663 ms | 0.0187 ms | 0.0175 ms |    1 |  306.6406 | 134.7656 |       - |   1.35 MB |
-| OldTextFieldParser                                   |  9.543 ms | 0.1640 ms | 0.1534 ms |    2 | 3343.7500 | 421.8750 | 15.6250 |  12.51 MB |
+Measured on .NET 11 with v1.3.0. `NitroTextFieldParser` and `OldTextFieldParser` map each row into a typed model; `NitroParseOnly` measures `ReadFields()` alone.
+
+| Method                   | Mean       | Allocated   |
+|------------------------- |-----------:|------------:|
+| NitroParseOnly           |   169.2 us |   360.56 KB |
+| NitroTextFieldParser     |   387.4 us |   841.67 KB |
+| OldTextFieldParser       | 4,404.2 us | 12790.35 KB |
 
 ---
+
+## Release Notes 1.3.0v
+- Performance: delimiter scanning now uses vectorised `SearchValues<char>` search instead of checking every delimiter at every character. `ReadFields()` is about 2.7x faster and allocates about 60% less memory than 1.2.0.
+- Performance: removed an unused compiled `Regex` that was built on every `SetDelimiters()` call.
+- Performance: field lists are reused between rows; only the returned array is allocated.
+- No API or behaviour changes.
+
+## Release Notes 1.2.0v
+- Targets .NET 8, .NET 10 and .NET 11 (previously .NET 9 only).
 
 ## Release Notes 1.1.0v
 - New Feature: Added schema validation support for parsing fields with precise data structures. Users can now define custom patterns and types for fields, enabling automated detection of malformed data.
